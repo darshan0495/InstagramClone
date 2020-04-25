@@ -40,7 +40,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
-        setTitle("Welcome to INSTA FAAAKE!!!");
+        setTitle("Welcome!");
         toolbar=findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
@@ -109,7 +109,9 @@ public class SocialMediaActivity extends AppCompatActivity {
                 Bitmap bitmap=MediaStore.Images.Media.getBitmap(this.getContentResolver(),
                         capturedImage);
                 ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
-                      byte[] bytes=byteArrayOutputStream.toByteArray();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+
+                byte[] bytes=byteArrayOutputStream.toByteArray();
                 ParseFile parseFile=new ParseFile("pic.png",bytes);
                 ParseObject parseObject=new ParseObject("Photo");
                 parseObject.put("picture",parseFile);
@@ -124,7 +126,7 @@ public class SocialMediaActivity extends AppCompatActivity {
                             FancyToast.makeText(SocialMediaActivity.this,"Uploaded Image",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                         }else{
                             dialog.dismiss();
-                            FancyToast.makeText(SocialMediaActivity.this,e.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                            FancyToast.makeText(SocialMediaActivity.this,e.getMessage(),FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
 
                         }
                     }

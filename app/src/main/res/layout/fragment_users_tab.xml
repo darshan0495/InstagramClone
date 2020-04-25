@@ -7,29 +7,17 @@
     tools:context=".UsersTab">
 
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="30dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
 
-    <TextView
-        android:id="@+id/txtLoadingData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Loading Users... Please Wait...."
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="42sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="409dp"
+                android:layout_height="729dp"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.39" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
