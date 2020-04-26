@@ -20,9 +20,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/viewPager"
-        android:layout_below="@+id/appBarLayout"/>
+        android:layout_below="@+id/appBarLayout"
+        android:background="#FFF9C4" />
 </RelativeLayout>
