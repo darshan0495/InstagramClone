@@ -49,8 +49,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnSignUpLoginActivity.setOnClickListener(this);
         btnLoginActivity.setOnClickListener(this);
 
-        if(ParseUser.getCurrentUser()!=null)
-            transitionToSocialMediaActivity();
+        if(ParseUser.getCurrentUser()!=null){
+            Intent intent=new Intent(LoginActivity.this,SocialMediaActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 
@@ -68,7 +71,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void done(ParseUser user, ParseException e) {
                         if (user!=null&&e==null){
                             FancyToast.makeText(LoginActivity.this,"Welcome Back "+user.getUsername(), Toast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-                            transitionToSocialMediaActivity();
+                            Intent intent=new Intent(LoginActivity.this,SocialMediaActivity.class);
+                            startActivity(intent);
+                            finish();
                         }else {
                             FancyToast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG, FancyToast.ERROR, false).show();
                         }
@@ -89,10 +94,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-    private void transitionToSocialMediaActivity(){
-        Intent intent=new Intent(LoginActivity.this,SocialMediaActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

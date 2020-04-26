@@ -61,6 +61,7 @@ public class UsersPost extends AppCompatActivity {
                             @Override
                             public void done(byte[] data, ParseException e) {
                              if (data!=null&&e==null){
+
                                  Bitmap bitmap= BitmapFactory.decodeByteArray(data,0,data.length);
                                  ImageView postImageView=new ImageView(UsersPost.this);
                                  LinearLayout.LayoutParams imageView_params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
