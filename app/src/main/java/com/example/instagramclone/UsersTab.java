@@ -1,9 +1,11 @@
 package com.example.instagramclone;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
@@ -34,6 +36,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
     private ListView listView;
     private ArrayList<String> arrayList;
     private ArrayAdapter arrayAdapter;
+    private WaveSwipeRefreshLayout myWaveSwipeRefreshLayout;
 
     public UsersTab() {
         // Required empty public constructor
@@ -46,6 +49,8 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
         // Inflate the layout for this fragment
         final View view=inflater.inflate(R.layout.fragment_users_tab, container, false);
 
+        myWaveSwipeRefreshLayout=view.findViewById(R.id.swipeContainer);
+        myWaveSwipeRefreshLayout.setWaveColor(Color.rgb(251,192,45));
         listView=view.findViewById(R.id.listView);
         arrayList=new ArrayList();
         arrayAdapter=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,arrayList);
@@ -53,7 +58,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
         listView.setOnItemLongClickListener(UsersTab.this);
 
 
-
+        try {
         ParseQuery<ParseUser>parseQuery=ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username",ParseUser.getCurrentUser().getUsername());
         parseQuery.findInBackground(new FindCallback<ParseUser>() {
@@ -67,6 +72,44 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                         listView.setAdapter(arrayAdapter);
                         listView.setVisibility(View.VISIBLE);
                     }
+                }
+            }
+        });
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        myWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    ParseQuery<ParseUser>parseQuery=ParseUser.getQuery();
+                    parseQuery.whereNotEqualTo("username",ParseUser.getCurrentUser().getUsername());
+                    parseQuery.whereNotContainedIn("username",arrayList);
+                    parseQuery.findInBackground(new FindCallback<ParseUser>() {
+                        @Override
+                        public void done(List<ParseUser> objects, ParseException e) {
+                            if (objects.size()>0){
+                                if (e==null){
+                                    for (ParseUser user:objects){
+                                        arrayList.add(user.getUsername());
+                                    }
+                                    arrayAdapter.notifyDataSetChanged();
+                                }if(myWaveSwipeRefreshLayout.isRefreshing()){
+                                    myWaveSwipeRefreshLayout.setRefreshing(false);}
+                            }
+
+                            else {
+                                if(myWaveSwipeRefreshLayout.isRefreshing()){
+                                    myWaveSwipeRefreshLayout.setRefreshing(false);}
+                            }
+
+
+                        }
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         });

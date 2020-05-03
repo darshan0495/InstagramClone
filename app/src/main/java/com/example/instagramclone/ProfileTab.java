@@ -2,9 +2,11 @@ package com.example.instagramclone;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,6 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 public class ProfileTab extends Fragment {
     private TextView edtProfileName,edtProfileHobbies,edtProfileBio,edtProfileProfession,edtProfileFavSport;
     private Button btnUpdateInfo;
-
     public ProfileTab() {
         // Required empty public constructor
     }
@@ -43,6 +44,21 @@ public class ProfileTab extends Fragment {
         edtProfileProfession=view.findViewById(R.id.edtProfileProfession);
         edtProfileFavSport=view.findViewById(R.id.edtProfileFavSport);
         btnUpdateInfo=view.findViewById(R.id.btnUpdateInfo);
+
+        addProfileData();
+
+        btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ProfileEdit.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
+
+    }
+    public void addProfileData(){
         final ParseUser parseUser=ParseUser.getCurrentUser();
         if (parseUser.get("profileName")==null){
             edtProfileName.setText("");
@@ -78,14 +94,5 @@ public class ProfileTab extends Fragment {
             edtProfileFavSport.setText(parseUser.get("profileFavSport")+"");
 
         }
-        btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(),ProfileEdit.class);
-                startActivity(intent);
-            }
-        });
-        return view;
-
     }
 }

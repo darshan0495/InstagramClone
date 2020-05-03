@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
     implementation 'com.github.mjn1369:prettydialog:1.0.4'
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
+    implementation 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
 }

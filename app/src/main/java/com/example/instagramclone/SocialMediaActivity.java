@@ -40,7 +40,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
-        setTitle("Welcome!");
+        setTitle("Welcome to Cortex!");
         toolbar=findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
